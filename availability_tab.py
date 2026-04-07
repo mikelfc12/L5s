@@ -1,9 +1,9 @@
-from pathlib import Path
-
 import pandas as pd
 import streamlit as st
 
-AVAILABILITY_FILE = Path("availability.csv")
+from github_csv import load_csv, save_csv
+
+AVAILABILITY_FILE = "availability.csv"
 AVAILABLE_DATES = [
     "May Tuesday 5th",
     "May Tuesday 19th",
@@ -38,7 +38,7 @@ def render_availability_tab():
             st.error("Please enter a player name.")
         else:
             updated_df = _upsert_availability(existing_df, player_name, selected_dates)
-            updated_df.to_csv(AVAILABILITY_FILE, index=False)
+            save_csv(AVAILABILITY_FILE, updated_df, f"Update availability for {player_name}")
             existing_df = updated_df
             st.success(f"Saved availability for {player_name}.")
 
@@ -54,9 +54,7 @@ def render_availability_tab():
 
 
 def _load_availability():
-    if not AVAILABILITY_FILE.exists():
-        return pd.DataFrame(columns=["Player", "Available Dates"])
-    return pd.read_csv(AVAILABILITY_FILE)
+    return load_csv(AVAILABILITY_FILE, ["Player", "Available Dates"])
 
 
 def _upsert_availability(existing_df, player_name, selected_dates):

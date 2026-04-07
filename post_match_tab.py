@@ -1,10 +1,10 @@
-from pathlib import Path
-
 import pandas as pd
 import streamlit as st
 
+from github_csv import load_csv, save_csv
+
 GAMEWEEK = "GW9"
-POST_MATCH_FILE = Path("post_match.csv")
+POST_MATCH_FILE = "post_match.csv"
 POST_MATCH_PLAYERS = [
     "Rory Scullin",
     "Steven Robinson",
@@ -65,7 +65,7 @@ def render_post_match_tab():
                 gotg,
                 ratings,
             )
-            updated_df.to_csv(POST_MATCH_FILE, index=False)
+            save_csv(POST_MATCH_FILE, updated_df, f"Add post-match submission for {player_name}")
             st.success(f"Saved post-match answers for {player_name}.")
 
 
@@ -82,9 +82,7 @@ def _validate_submission(player_name, motm, gotg, ratings):
 
 
 def _load_post_match_submissions():
-    if not POST_MATCH_FILE.exists():
-        return pd.DataFrame(columns=_submission_columns())
-    return pd.read_csv(POST_MATCH_FILE)
+    return load_csv(POST_MATCH_FILE, _submission_columns())
 
 
 def _append_post_match_submission(existing_df, player_name, goals_scored, motm, gotg, ratings):
