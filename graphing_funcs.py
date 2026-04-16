@@ -187,7 +187,8 @@ def plot_radar_chart(finaldata, list_of_players, method = 'prop', return_obj = F
             radialaxis=dict(
                 showticklabels=False, # Hides the numbers
                 ticks='',             # Hides the tick lines
-                visible=False
+                visible=False,
+                range = [0, max_rank+2] # give space to hover on max-rankers
             )
         )
     )
