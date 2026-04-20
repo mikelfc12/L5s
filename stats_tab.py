@@ -9,6 +9,7 @@ import plotly.express as px
 import streamlit as st
 from matplotlib.offsetbox import AnnotationBbox, OffsetImage
 from matplotlib.patches import Circle
+from player_comp_tab import _render_player_comparisons # Think we should store the _render funcs in their own files
 
 import display_functions as disp_f
 import statistics as s
@@ -22,8 +23,8 @@ BALL_URL = (
 
 def render_stats_tab(raw_data_df):
     st.info("Stats")
-    league_table, latest_match, player_combinations, charts_over_time, formation, raw_data_tab = st.tabs(
-        ["League Table", "Last match", "Player Combinations", "Charts over time", "Formations", "View Raw Data"]
+    league_table, latest_match, player_combinations, charts_over_time, formation, player_comp_tab, raw_data_tab = st.tabs(
+        ["League Table", "Last match", "Player Combinations", "Charts over time", "Formations", "Player Comparisons","View Raw Data"]
     )
 
     with league_table:
@@ -40,6 +41,9 @@ def render_stats_tab(raw_data_df):
 
     with formation:
         _render_formation(raw_data_df)
+
+    with player_comp_tab:
+        _render_player_comparisons(raw_data_df)
 
     with raw_data_tab:
         st.dataframe(raw_data_df, hide_index=True)
@@ -369,3 +373,4 @@ def _draw_pitch(data, ball_img, fig_scale=0.25):
     plot_team(data["team_a"], "#d62828")
     plot_team(data["team_b"], "#1d4ed8")
     return fig
+
