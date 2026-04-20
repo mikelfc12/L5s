@@ -1,20 +1,19 @@
 # --- Player GIFs ---
 player_images = {
-    "Jacob Stokes": "https://i0.wp.com/www.5-a-side.com/wp-content/uploads/2016/11/Wash-Football-Bibs.png",
-    "Rory Scullin": "https://media.tenor.com/Aoz9_qKxxiIAAAAM/cry-sad.gif",
+    "Jacob Stokes": "https://butchers-sundries.com/cdn/shop/products/OriginalTomatoKetchup_StockesSauces_ButchersSundries_Image1.jpg?v=1601653143&width=1000",
+    "Rory Scullin": "https://innerbody.imgix.net/Skull.png",
+    "James King": "images/king.png",
+    "Steven Robinson": "https://c8.alamy.com/comp/2A00MJT/promotion-label-promotion-red-band-sign-promotion-2A00MJT.jpg",
+    "Toby Munson": "https://static.wikia.nocookie.net/ttte/images/0/0c/MainTobyModel.png/revision/latest?cb=20250531164542",
+    "Callum Goodyear": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Callum_Turner-69856_%28cropped%29.jpg/960px-Callum_Turner-69856_%28cropped%29.jpg",
+    "Jamie Dobbs": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiJiTXt371SjR3TzfBSavQFO8uIrvmvN74Mg&s",
+    "Michael Dixon": "https://preview.redd.it/no-hate-towards-mike-but-i-think-season-1-still-stands-as-v0-p7yus6zlb3i91.jpg?width=640&crop=smart&auto=webp&s=d2aeded52691af8650990b051c30e0090cebe65a",
+    "Daniel Hirst": "https://ichef.bbci.co.uk/images/ic/1200x675/p07h17xl.jpg",
+    "Oliver Deverall": "https://www.shutterstock.com/image-photo/delicious-green-olives-leaves-isolated-260nw-2492503625.jpg",
+    
     "Josh": "https://www.theodysseyonline.com/media-library/image.gif?id=56296612&width=210",
-    "Steven Robinson": "https://images.ft.com/v3/image/raw/https%3A%2F%2Fd1e00ek4ebabms.cloudfront.net%2Fproduction%2F8c4e4a00-8ecd-406d-bcf4-a08506298679.jpg?source=next-article&fit=scale-down&quality=highest&width=700&dpr=1",
-    "Toby Munson": "https://media.tenor.com/cOsiTargIp8AAAAM/hes-back.gif",
-    "Callum Goodyear": "https://img.gifglobe.com/grabs/inbetweeners/S01E04/gif/pVaj9AyGJBzO.gif",
-    "Jamie Dobbs": "https://media.tenor.com/wYZGlNQzWzMAAAAM/jamie-king-ponste9.gif",
-    "Michael Dixon": "https://mediacdn.mancity.com/-/media/images/home/news/team-news/2011-2012-season/the-graduates/dickson-etuhu-grad2.ashx?width=1620",
-    "Daniel Hirst": "https://static.euronews.com/articles/stories/08/31/79/86/1200x675_cmsv2_39ce878d-73fb-5f1e-b404-c3be8899b4f4-8317986.jpg",
-    "Oliver Deverall": "https://valuestats.com/uploads/referees/referee_67b58991607cd.webp",
-
-    "James King": "https://media.cnn.com/api/v1/images/stellar/prod/230508143040-01c-king-charles-official-portrait-0508.jpg?c=original",
     "Mark McGlinchey": "https://pbs.twimg.com/media/GOiFopxXYAA0vSy.jpg",
     "John Bridgeman": "https://i.ytimg.com/vi/Uj5iPDcRiUg/maxresdefault.jpg",
-    
 }
 
 player_stats = {
@@ -44,7 +43,24 @@ CARD_IMAGES = {
 }
 
 never_played_pairs = [
-    ("Toby Munson", "Callum Goodyear"),
+    ("Neil Roberton", "Jacob Stokes"),
+("Neil Roberton", "James King"),
+("Neil Roberton", "Rory Scullin"),
+("Neil Roberton", "Toby Munson"),
+("Neil Roberton", "Oliver Deverall"),
+("Neil Roberton", "Mark McGlinchey"),
+("Neil Roberton", "Steven Robinson"),
+("John Bridgman", "Michael Dixon"),
+("John Bridgman", "Daniel Hirst"),
+("John Bridgman", "Jacob Stokes"),
+("John Bridgman", "James King"),
+("John Bridgman", "Toby Munson"),
+("John Bridgman", "Oliver Deverall"),
+("John Bridgman", "Mark McGlinchey"),
+("John Bridgman", "Jamie Dobbs"),
+("John Bridgman", "Steven Robinson"),
+("John Bridgman", "Neil Roberton"),
+
 ]
 
 never_won_pairs = [
@@ -61,20 +77,31 @@ never_won_pairs = [
     ("Toby Munson", "Rory Scullin"),
     ("Toby Munson", "Steven Robinson"),
     ("Oliver Deverall", "Daniel Hirst"),
-    ("Oliver Deverall", "Jacob Stokes"),
     ("Oliver Deverall", "James King"),
-    ("Oliver Deverall", "Jamie Dobbs"),
     ("Steven Robinson", "Daniel Hirst"),
+    ("Neil Roberton", "Jacob Stokes"),
+    ("Neil Roberton", "James King"),
+    ("Neil Roberton", "Rory Scullin"),
+    ("Neil Roberton", "Toby Munson"),
+    ("Neil Roberton", "Oliver Deverall"),
+    ("Neil Roberton", "Steven Robinson"),
+    ("Neil Roberton", "Mark McGlinchey"),
+
 ]
 
 perfect_record_pairs = [
-    ("Michael Dixon", "Jamie Dobbs"),
-    ("Callum Goodyear", "Jacob Stokes"),
-    ("Callum Goodyear", "James King"),
-    ("Rory Scullin", "Daniel Hirst"),
-    ("Rory Scullin", "Jacob Stokes"),
-    ("Rory Scullin", "Jamie Dobbs"),
-    ("Steven Robinson", "Jacob Stokes"),
+("Michael Dixon", "Jamie Dobbs"),
+("Callum Goodyear", "Jacob Stokes"),
+("Callum Goodyear", "James King"),
+("Rory Scullin", "Daniel Hirst"),
+("Rory Scullin", "Jacob Stokes"),
+("Rory Scullin", "Jamie Dobbs"),
+("Steven Robinson", "Jacob Stokes"),
+("Neil Roberton", "Michael Dixon"),
+("Neil Roberton", "Daniel Hirst"),
+("Neil Roberton", "Callum Goodyear"),
+("Neil Roberton", "Jamie Dobbs"),
+
 ]
 
 previous_teams = {
@@ -92,4 +119,9 @@ previous_teams = {
     "B6": ["Michael Dixon", "Jacob Stokes", "James King", "Mark McGlinchey", "Rory Scullin"],
     "A7": ["Callum Goodyear", "Ringer", "Ringer", "John Bridgman", "Rory Scullin"],
     "B7": ["Jamie Dobbs", "Steven Robinson", "James King", "Oliver Deverall", "Ringer"],
+    "A8": ["Callum Goodyear", "Rory Scullin", "Jacob Stokes", "Jamie Dobbs", "Steven Robinson"],
+    "B8": ["Michael Dixon", "Daniel Hirst", "James King", "Mark McGlinchey", "Ringer"],
+    "A9": ["Steven Robinson", "Jamie Dobbs", "Jacob Stokes", "Oliver Deverall", "Rory Scullin"],
+    "B9": ["Callum Goodyear", "Daniel Hirst", "Michael Dixon", "Toby Munson", "Ringer"],
+
 }

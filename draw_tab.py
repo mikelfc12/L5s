@@ -4,14 +4,16 @@ import display_functions as disp_f
 import functions as func
 import variables as v
 
-TEAM_A_STARTER = ["Rory Scullin", "Steven Robinson"]
-TEAM_B_STARTER = ["Callum Goodyear", "Toby Munson"]
-POT_1 = ["Michael Dixon", "Josh"]
-POT_2 = ["Jamie Dobbs", "Oliver Deverall"]
-POT_3 = ["Daniel Hirst", "Jacob Stokes"]
+
+TEAM_A_STARTER = []
+TEAM_B_STARTER = []
+POT_1 = ["Daniel Hirst", "Jacob Stokes"]
+POT_2 = ["Callum Goodyear", "Toby Munson", "Oliver Deverall", "Steven Robinson"]
+POT_3 = ["Michael Dixon", "James King","Jamie Dobbs", "Rory Scullin"]
 
 
 def render_draw_tab():
+    print(30*"-")
     col1, col2, col3 = st.columns([3, 2, 3])
     with col1:
         st.markdown("### 🟥 Team A")
@@ -34,8 +36,8 @@ def render_draw_tab():
             TEAM_A_STARTER,
             TEAM_B_STARTER,
             v.previous_teams,
-            ("keep", POT_1),
-            ("keep", POT_2),
+            ("split", POT_1),
+            ("split", POT_2),
             ("split", POT_3),
         )
         print("A:", team_a)
@@ -45,36 +47,32 @@ def render_draw_tab():
 
         # Introduce hosts
         disp_f.say("Introducing our first host", text_box)
-        disp_f.say("All the way from Chester and Ellesmere Port", text_box)
-        disp_f.say("He's made time for us on this Tuesday day before Wednesday", text_box)
-        gif_box.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTCtWodEx7DX9LCkK8-NrgfMDsLcx7PFcmViQ&s")
-
-        disp_f.say("Famous for his luxurious desserts", text_box)
-        disp_f.say("Hi guys, just back from Benidorm, lovely bit of tan from the sun one before the moon", text_box)
+        disp_f.say("All the way from Canada", text_box)
+        disp_f.say("You might be seeing more of them in Portugal", text_box)
+        gif_box.image("https://winningmoves.co.uk/cdn/shop/files/5675b772-0247-4697-8696-e308afb2a6cf.jpg?v=1713174916")
+        gif_box.empty()
+        disp_f.say("11 stage presence, lets see how you can perform on the biggest stage of all", text_box)
+        disp_f.say("The 4most 5 a side LIVE draw", text_box)
+        disp_f.say("Hey guyyssssss", text_box)
         gif_box.empty()
         disp_f.clear_text_box(text_box)
+        disp_f.say("Cheers Carly", text_box)
 
+        disp_f.say("And alongside her, ", text_box)
+        disp_f.say("One of the worlds worst guys", text_box)
+        disp_f.say("Actually hate this guy", text_box)
+        gif_box.image("https://i.redd.it/kmb1j74ojhcb1.jpg")
 
-
-        
-        disp_f.say("And alongside him, ", text_box)
-        gif_box.image("images/host.png")
+        disp_f.say("Do you have any quiz questions for us lads?", text_box)
+        disp_f.say("Rory and who other have the best 2 player combination with 4 wins from 4 and a GD of 14??", text_box)
         disp_f.pause(10)
-        disp_f.say("You guessed it, it's Aaron Lennon", text_box)
-        gif_box.image("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRDjKNvTVpN-c0scImvgHEdjJh5rTP_ssAW3stGlCj5TVNZVrConHhKke2-ap5cONLsgfme10_AFBenRybBoc-3PO_XMj_FSt4g6izRcg&s=10")
+        disp_f.say("Yep you guessed it, it's last weeks MOTM, ya boy Stokes", text_box)
         gif_box.empty()
 
-        disp_f.say("How we doing Leeeeedsssssss", text_box)
-        
+        disp_f.say("More stats like this corker on the site", text_box)
 
-        disp_f.say("We have some huge news to be shared", text_box)
-        disp_f.say("We're going global...", text_box)
-        disp_f.say("Later today, a link to this hot off the press website will drop", text_box)
-        disp_f.say("Full of all the stats you desire, forms and more in the pipeline", text_box)
-        disp_f.say("Comments, improvements and any bugs you spot, please shout", text_box)
-        disp_f.say("Huge", text_box)
+
         disp_f.say("Lovely day for it", text_box)
-
         disp_f.clear_text_box(text_box)
 
         disp_f.say("Speaking of which, lets have a weather report", text_box)
@@ -82,7 +80,7 @@ def render_draw_tab():
         disp_f.pause(5)
         gif_box.empty()
 
-        disp_f.say("16 degrees lets gooooo", text_box)
+        disp_f.say("Sunny init neymar", text_box)
         disp_f.clear_text_box(text_box)
 
         disp_f.say("Right, lets get into the draw...", text_box)

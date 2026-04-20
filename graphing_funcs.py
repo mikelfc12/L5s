@@ -278,4 +278,4 @@ def form_chart(data, player, last_x_games = False, x = 0, return_obj = False):
     else:
         fig.show()
 
-form_chart(raw_data_df, "Daniel Hirst")
+# form_chart(raw_data_df, "Daniel Hirst")
