@@ -65,7 +65,16 @@ def render_draw_tab():
         gif_box.empty()
 
         disp_f.say("How we doing Leeeeedsssssss", text_box)
+        
+
+        disp_f.say("We have some huge news to be shared", text_box)
+        disp_f.say("We're going global...", text_box)
+        disp_f.say("Later today, a link to this hot off the press website will drop", text_box)
+        disp_f.say("Full of all the stats you desire, forms and more in the pipeline", text_box)
+        disp_f.say("Comments, improvements and any bugs you spot, please shout", text_box)
+        disp_f.say("Huge", text_box)
         disp_f.say("Lovely day for it", text_box)
+
         disp_f.clear_text_box(text_box)
 
         disp_f.say("Speaking of which, lets have a weather report", text_box)

@@ -5,13 +5,14 @@ from pathlib import Path
 import pandas as pd
 import requests
 import streamlit as st
+from streamlit.errors import StreamlitSecretNotFoundError
 
 REPO = "mikelfc12/L5s"
 BRANCH = "main"
 
 
 def load_csv(file_path, columns):
-    token = st.secrets.get("GITHUB_TOKEN")
+    token = _get_github_token()
     if token:
         return _load_csv_from_github(file_path, columns, token)
 
@@ -22,7 +23,7 @@ def load_csv(file_path, columns):
 
 
 def save_csv(file_path, df, commit_message):
-    token = st.secrets.get("GITHUB_TOKEN")
+    token = _get_github_token()
     if token:
         _save_csv_to_github(file_path, df, commit_message, token)
         return
@@ -72,3 +73,10 @@ def _github_url(file_path):
 
 def _headers(token):
     return {"Authorization": f"token {token}"}
+
+
+def _get_github_token():
+    try:
+        return st.secrets.get("GITHUB_TOKEN")
+    except StreamlitSecretNotFoundError:
+        return None
