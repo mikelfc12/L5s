@@ -72,13 +72,15 @@ def render_post_match_tab():
             st.success(f"Saved post-match answers for {player_name}.")
 
 
-def _validate_submission(player_name, motm, gotg, ratings):
+def _validate_submission(player_name, motm, gotg, gotg_desc, ratings):
     if not player_name:
         return "Please enter a player name."
     if motm == "Select a player":
         return "Please choose a MOTM."
     if gotg == "Select a player":
         return "Please choose who scored the GOTG."
+    if not gotg_desc.strip():
+        return "Please describe the goal of the game."
     if any(rating is None for rating in ratings.values()):
         return "Please provide a rating for every player."
     return None
@@ -88,13 +90,14 @@ def _load_post_match_submissions():
     return load_csv(POST_MATCH_FILE, _submission_columns())
 
 
-def _append_post_match_submission(existing_df, player_name, goals_scored, motm, gotg, ratings):
+def _append_post_match_submission(existing_df, player_name, goals_scored, motm, gotg, gotg_desc, ratings):
     submission_row = {
         "Gameweek": GAMEWEEK,
         "Player Name": player_name,
         "Goals Scored": goals_scored,
         "MOTM": motm,
         "GOTG": gotg,
+        "GOTG Description": gotg_desc.strip(),
     }
     submission_row.update({f"Rating - {player}": rating for player, rating in ratings.items()})
 
