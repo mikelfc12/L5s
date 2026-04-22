@@ -7,8 +7,8 @@ import variables as v
 
 TEAM_A_STARTER = []
 TEAM_B_STARTER = []
-POT_1 = ["Daniel Hirst", "Jacob Stokes"]
-POT_2 = ["Callum Goodyear", "Toby Munson", "Oliver Deverall", "Steven Robinson"]
+POT_1 = []
+POT_2 = ["Callum Goodyear", "Toby Munson", "Oliver Deverall", "Steven Robinson","Daniel Hirst", "Jacob Stokes"]
 POT_3 = ["Michael Dixon", "James King","Jamie Dobbs", "Rory Scullin"]
 
 
@@ -49,7 +49,7 @@ def render_draw_tab():
         disp_f.say("Introducing our first host", text_box)
         disp_f.say("All the way from Canada", text_box)
         disp_f.say("You might be seeing more of them in Portugal", text_box)
-        gif_box.image("https://winningmoves.co.uk/cdn/shop/files/5675b772-0247-4697-8696-e308afb2a6cf.jpg?v=1713174916")
+        gif_box.image("images/carly.png")
         gif_box.empty()
         disp_f.say("11 stage presence, lets see how you can perform on the biggest stage of all", text_box)
         disp_f.say("The 4most 5 a side LIVE draw", text_box)
@@ -84,6 +84,11 @@ def render_draw_tab():
         disp_f.clear_text_box(text_box)
 
         disp_f.say("Right, lets get into the draw...", text_box)
+        disp_f.say("Everyone has played together now", text_box)
+        disp_f.say("So it's a case of breaking up the winning pairs", text_box)
+        disp_f.say("And getting the non winning pairs a win, if possible..", text_box)
+        disp_f.say("Also rotating the 5s, no 5 people will play as a team for as long as I can allow", text_box)
+
         disp_f.clear_text_box(text_box)
 
         remaining_players = team_a + team_b

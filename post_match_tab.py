@@ -3,7 +3,7 @@ import streamlit as st
 
 from github_csv import load_csv, save_csv
 
-GAMEWEEK = "GW9"
+GAMEWEEK = "GW10"
 POST_MATCH_FILE = "post_match.csv"
 POST_MATCH_PLAYERS = [
     "Rory Scullin",
@@ -15,7 +15,7 @@ POST_MATCH_PLAYERS = [
     "Daniel Hirst",
     "Jacob Stokes",
     "Jamie Dobbs",
-    "Josh",
+    "James King",
 ]
 RATING_OPTIONS = [1, 2, 3, 4, 5, 6, 7]
 
@@ -39,6 +39,8 @@ def render_post_match_tab():
             index=0,
         )
 
+        gotg_desc = st.text_input("Describe the goal")
+
         st.markdown("### 4. Player Ratings")
         ratings = {}
         for player in POST_MATCH_PLAYERS:
@@ -53,7 +55,7 @@ def render_post_match_tab():
         submitted = st.form_submit_button("Submit")
 
     if submitted:
-        validation_error = _validate_submission(player_name, motm, gotg, ratings)
+        validation_error = _validate_submission(player_name, motm, gotg, gotg_desc, ratings)
         if validation_error:
             st.error(validation_error)
         else:
@@ -63,6 +65,7 @@ def render_post_match_tab():
                 int(goals_scored),
                 motm,
                 gotg,
+                gotg_desc,
                 ratings,
             )
             save_csv(POST_MATCH_FILE, updated_df, f"Add post-match submission for {player_name}")
@@ -108,5 +111,6 @@ def _submission_columns():
         "Goals Scored",
         "MOTM",
         "GOTG",
+        "GOTG Description",
         *[f"Rating - {player}" for player in POST_MATCH_PLAYERS],
     ]
