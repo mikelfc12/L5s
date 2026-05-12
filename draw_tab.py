@@ -2,6 +2,7 @@ import streamlit as st
 
 import display_functions as disp_f
 import functions as func
+import statistics as s
 import variables as v
 
 
@@ -125,17 +126,18 @@ def render_draw_tab():
 
         disp_f.say("Some stats on these teams please, if any", text_box)
 
-        _render_team_alerts("Team A", team_a)
-        _render_team_alerts("Team B", team_b)
+        pair_records = s.generate_pair_records(st.session_state["raw_data_df"])
+        _render_team_alerts("Team A", team_a, pair_records)
+        _render_team_alerts("Team B", team_b, pair_records)
 
         st.success("🏁 The draw is complete!")
         st.balloons()
 
 
-def _render_team_alerts(team_label, team):
-    never_won = func.check_pairs(team, v.never_won_pairs)
-    perfect_record = func.check_pairs(team, v.perfect_record_pairs)
-    never_played = func.check_pairs(team, v.never_played_pairs)
+def _render_team_alerts(team_label, team, pair_records):
+    never_won = func.check_pairs(team, pair_records["never_won"])
+    perfect_record = func.check_pairs(team, pair_records["perfect_record"])
+    never_played = func.check_pairs(team, pair_records["never_played"])
 
     st.markdown(f"### {team_label} Alerts")
 

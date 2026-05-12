@@ -1,6 +1,8 @@
 import pandas as pd
 from itertools import combinations
 
+from roster import CANONICAL_PLAYERS
+
 
 # TODO
 # Form
@@ -51,6 +53,8 @@ def convert_to_player_table(df):
         Team_GD=("Team_GD", "sum"),
     ).reset_index()
 
+    player_table["Form"] = player_table["Name"].map(build_player_form(df))
+
     # % of total goals
 
     player_table['Win %'] = player_table['Wins'] / player_table['Played']
@@ -70,7 +74,7 @@ def convert_to_player_table(df):
     ).reset_index(drop=True)
 
     player_table = player_table[
-        ['Name', 'Avg_Rating', 'Played', 'Wins', 'Draws', 'Losses', 'Points', 'Win %', 'Goals', 'GPG',
+        ['Name', 'Form', 'Avg_Rating', 'Played', 'Wins', 'Draws', 'Losses', 'Points', 'Win %', 'Goals', 'GPG',
          '% of team goals', '% of total goals', 'Team_GF', 'Team_GA', 'Team_GD', 'Ave TGF', 'Ave TGA', 'Ave TGD',
          'MOTM', 'Ave MOTM', 'GOTG', 'Ave GOTG']]
 
@@ -81,6 +85,38 @@ def convert_to_player_table(df):
 
 def calculate_form(df):
     pass
+
+
+def analytics_filter(df, remove_part_timers=False):
+    if not remove_part_timers:
+        return df.copy()
+
+    appearances = df.groupby("Name").size()
+    eligible_players = appearances[appearances >= 3].index
+    return df[(df["Name"].isin(eligible_players)) & (df["Name"] != "Ringer")].copy()
+
+
+def ordered_match_dates(df):
+    return sorted(df["Date"].dropna().unique().tolist())
+
+
+def build_player_form(df, last_n=5):
+    ordered_dates = ordered_match_dates(df)
+    player_results = (
+        df.sort_values(["Date", "Name"])
+        .drop_duplicates(subset=["Name", "Date"], keep="last")
+        .set_index(["Name", "Date"])["Result"]
+        .to_dict()
+    )
+
+    form_map = {}
+    for player in sorted(df["Name"].dropna().unique()):
+        recent_results = [
+            player_results.get((player, match_date), "-")
+            for match_date in ordered_dates[-last_n:]
+        ]
+        form_map[player] = "".join(recent_results)
+    return form_map
 
 
 def last_game_stats(df):
@@ -152,3 +188,38 @@ def combination_league(df, x):
         league_table.append({'Combination': combo, **stats})
 
     return pd.DataFrame(league_table).sort_values(by='Wins', ascending=False)
+
+
+def generate_pair_records(df, roster=None):
+    roster = roster or CANONICAL_PLAYERS
+    combo_stats = {
+        tuple(sorted(combo)): {"played": 0, "wins": 0}
+        for combo in combinations(sorted(roster), 2)
+    }
+
+    grouped = df[df["Name"].isin(roster)].groupby(["Team", "Date"])
+    for (_, _), group in grouped:
+        players = sorted(group["Name"].unique().tolist())
+        result = str(group["Result"].iloc[0]).upper()
+
+        for combo in combinations(players, 2):
+            stats = combo_stats[tuple(sorted(combo))]
+            stats["played"] += 1
+            if result == "W":
+                stats["wins"] += 1
+
+    records = {
+        "never_played": [],
+        "never_won": [],
+        "perfect_record": [],
+    }
+
+    for combo, stats in combo_stats.items():
+        if stats["played"] == 0:
+            records["never_played"].append(combo)
+        elif stats["wins"] == 0:
+            records["never_won"].append(combo)
+        elif stats["wins"] == stats["played"]:
+            records["perfect_record"].append(combo)
+
+    return records

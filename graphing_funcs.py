@@ -3,9 +3,10 @@ import pandas as pd
 from numpy import pi
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
+from data_paths import RAW_DATA_FILE
 
 
-raw_data_df = pd.read_csv('raw_data.csv')
+raw_data_df = pd.read_csv(RAW_DATA_FILE)
 
 
 #### Data Prep  Functions ####

@@ -1,6 +1,8 @@
 import pandas as pd
 
-raw_data_df = pd.read_csv("raw_data.csv")
+from data_paths import RAW_DATA_FILE
+
+raw_data_df = pd.read_csv(RAW_DATA_FILE)
 
 raw_data_df = raw_data_df[raw_data_df['Name'] != "Ringer"]
 

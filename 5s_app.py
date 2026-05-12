@@ -2,11 +2,12 @@ import pandas as pd
 import streamlit as st
 
 from availability_tab import render_availability_tab
+from data_paths import RAW_DATA_FILE
 from draw_tab import render_draw_tab
 from post_match_tab import render_post_match_tab
 from stats_tab import render_stats_tab
 
-raw_data_df = pd.read_csv("raw_data.csv")
+raw_data_df = pd.read_csv(RAW_DATA_FILE)
 
 
 def initialise_session_state():
@@ -14,6 +15,7 @@ def initialise_session_state():
         st.session_state.rpt = False
     if "unbeaten_combinations" not in st.session_state:
         st.session_state.unbeaten_combinations = False
+    st.session_state["raw_data_df"] = raw_data_df
 
 
 def render_app_styles():

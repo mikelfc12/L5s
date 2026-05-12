@@ -5,6 +5,7 @@ from pathlib import Path
 import pandas as pd
 import requests
 import streamlit as st
+from pandas.errors import EmptyDataError
 from streamlit.errors import StreamlitSecretNotFoundError
 
 REPO = "mikelfc12/L5s"
@@ -19,7 +20,13 @@ def load_csv(file_path, columns):
     local_path = Path(file_path)
     if not local_path.exists():
         return pd.DataFrame(columns=columns)
-    return pd.read_csv(local_path)
+    if local_path.stat().st_size == 0:
+        return pd.DataFrame(columns=columns)
+
+    try:
+        return pd.read_csv(local_path)
+    except EmptyDataError:
+        return pd.DataFrame(columns=columns)
 
 
 def save_csv(file_path, df, commit_message):
@@ -28,6 +35,7 @@ def save_csv(file_path, df, commit_message):
         _save_csv_to_github(file_path, df, commit_message, token)
         return
 
+    Path(file_path).parent.mkdir(parents=True, exist_ok=True)
     df.to_csv(file_path, index=False)
 
 

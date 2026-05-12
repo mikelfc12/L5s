@@ -23,27 +23,32 @@ BALL_URL = (
 
 def render_stats_tab(raw_data_df):
     st.info("Stats")
-    league_table, latest_match, player_combinations, charts_over_time, formation, player_comp_tab, raw_data_tab = st.tabs(
-        ["League Table", "Last match", "Player Combinations", "Charts over time", "Formations", "Player Comparisons","View Raw Data"]
+    st.toggle("Remove part timers", key="rpt")
+    analytics_df = s.analytics_filter(raw_data_df, st.session_state.rpt)
+    league_table, latest_match, player_combinations, charts_over_time, iqr_ratings, formation, player_comp_tab, raw_data_tab = st.tabs(
+        ["League Table", "Last match", "Player Combinations", "Charts over time", "IQR Ratings", "Formations", "Player Comparisons","View Raw Data"]
     )
 
     with league_table:
-        _render_league_table(raw_data_df)
+        _render_league_table(analytics_df)
 
     with latest_match:
-        _render_latest_match(raw_data_df)
+        _render_latest_match(analytics_df)
 
     with player_combinations:
-        _render_player_combinations(raw_data_df)
+        _render_player_combinations(analytics_df)
 
     with charts_over_time:
-        _render_charts_over_time(raw_data_df)
+        _render_charts_over_time(analytics_df)
+
+    with iqr_ratings:
+        _render_iqr_ratings(analytics_df)
 
     with formation:
         _render_formation(raw_data_df)
 
     with player_comp_tab:
-        _render_player_comparisons(raw_data_df)
+        _render_player_comparisons(analytics_df)
 
     with raw_data_tab:
         st.dataframe(raw_data_df, hide_index=True)
@@ -56,29 +61,19 @@ def _render_league_table(raw_data_df):
         **{col: "{:.1%}" for col in ["Win %", "% of team goals", "% of total goals"]},
     }
 
-    st.toggle("Remove part timers", key="rpt")
     table = player_table.copy()
-
-    if st.session_state.rpt:
-        player_table_3plus = table[(table["Played"] >= 3) & (table["Name"] != "Ringer")].copy()
-        player_table_under3 = table[(table["Played"] < 3) | (table["Name"] == "Ringer")].copy()
-
-        player_table_3plus["Position"] = range(1, len(player_table_3plus) + 1)
-        player_table_under3["Position"] = range(1, len(player_table_under3) + 1)
-
-        st.dataframe(_style_player_table(player_table_3plus, format_dict), hide_index=True)
-        st.divider()
-        st.dataframe(_style_player_table(player_table_under3, format_dict), hide_index=True)
-        return
-
-    all_players = table.copy()
-    all_players["Position"] = range(1, len(all_players) + 1)
-    st.dataframe(_style_player_table(all_players, format_dict), hide_index=True)
+    table.insert(0, "Position", range(1, len(table) + 1))
+    table_height = max(420, 35 * (len(table) + 1))
+    st.dataframe(_style_player_table(table, format_dict), hide_index=True, height=table_height)
 
 
 def _style_player_table(table, format_dict):
+    formatter = {
+        **format_dict,
+        "Form": _render_form_icons,
+    }
     return (
-        table.style.format(format_dict)
+        table.style.format(formatter)
         .set_properties(
             subset=["Played", "Wins", "Draws", "Losses", "Points", "Win %"],
             **{"background-color": "#f8d7da"},
@@ -95,11 +90,30 @@ def _style_player_table(table, format_dict):
             subset=["MOTM", "Ave MOTM", "GOTG", "Ave GOTG"],
             **{"background-color": "#f0faa2"},
         )
+        .set_properties(
+            subset=["Form"],
+            **{"white-space": "nowrap"},
+        )
         .map(disp_f.colour_negative_red)
     )
 
 
+def _render_form_icons(form_value):
+    icon_map = {
+        "W": "🟢",
+        "L": "🔴",
+        "D": "🟡",
+        "-": "⚪",
+    }
+
+    return " ".join(icon_map.get(result, "⚪") for result in str(form_value or ""))
+
+
 def _render_latest_match(raw_data_df):
+    if raw_data_df.empty:
+        st.caption("No match data available for the current filter.")
+        return
+
     col1, col2 = st.columns([1, 1])
     with col1:
         last_match_stats = s.last_game_stats(raw_data_df)
@@ -142,7 +156,15 @@ def _render_player_combinations(raw_data_df):
     st.info("Here contains player information and combinations of statistics")
     num_players = st.radio("Number of players", [2, 3, 4, 5, 6], horizontal=True)
 
+    if raw_data_df.empty:
+        st.caption("No combination data available for the current filter.")
+        return
+
     player_combos = s.combination_league(raw_data_df, num_players)
+    if player_combos.empty:
+        st.caption("No combinations available for that player count with the current filter.")
+        return
+
     player_combos = player_combos.sort_values(by=["Points", "Team GD", "Goals"], ascending=False).reset_index(drop=True)
     player_combos = player_combos[
         ["Combination", "Avg_Rating", "Played", "Wins", "Draws", "Losses", "Points", "Win %", "Goals", "GPG", "Team GF", "Team GA", "Team GD"]
@@ -165,7 +187,6 @@ def _render_charts_over_time(raw_data_df):
     restart = st.button("Restart animation")
 
     goal_race_df = raw_data_df.copy()
-    goal_race_df = goal_race_df[goal_race_df["Name"] != "Ringer"].copy()
     goal_race_df["GW_Number"] = goal_race_df.groupby("Date").ngroup() + 1
     goal_race_df["GW"] = "GW" + goal_race_df["GW_Number"].astype(str)
 
@@ -237,6 +258,25 @@ def _render_charts_over_time(raw_data_df):
     st.title("Cumulative points over time")
 
 
+def _render_iqr_ratings(raw_data_df):
+    st.info("Rating distribution by player")
+    if raw_data_df.empty:
+        st.caption("No rating data available for the current filter.")
+        return
+
+    chart_df = raw_data_df.copy().sort_values(["Name", "Date"])
+    fig = px.box(
+        chart_df,
+        x="Name",
+        y="Rating",
+        points="outliers",
+        color="Name",
+        title="IQR Ratings",
+    )
+    fig.update_layout(showlegend=False, xaxis_title="Player", yaxis_title="Rating")
+    st.plotly_chart(fig, width="stretch")
+
+
 def _build_goal_race_frame(players, cumulative_goals):
     frame_rows = [
         {"Player": player, "TotalGoals": cumulative_goals.get(player, 0)}
@@ -250,6 +290,7 @@ def _build_goal_race_frame(players, cumulative_goals):
 
 def _render_formation(raw_data_df):
     st.title("Gameweek Lineup – Team A vs Team B")
+    st.caption("Legend: Gold = MOTM, Silver = GOTG, gold + silver rings = both awards.")
 
     df = raw_data_df.copy()
     df["GW"] = df.groupby("Date").ngroup() + 1

@@ -50,7 +50,11 @@ def _grab_chart(df, players, type_of_graph):
 def _render_player_comparisons(df: pd.DataFrame):
     st.title("Player Comparison Tool")
     list_of_players = df["Name"].unique()
-    chosen_players = list_of_players[[0, 10]]
+    if len(list_of_players) == 0:
+        st.caption("No player comparison data available for the current filter.")
+        return
+
+    chosen_players = list(list_of_players[:2])
     graph_type = "Radar"
     # with st.sidebar: interesting but not right for this
     formcol, graphcol = st.columns([0.2,0.8])

@@ -1,9 +1,10 @@
 import pandas as pd
 import streamlit as st
 
+from data_paths import AVAILABILITY_FILE, csv_repo_path
 from github_csv import load_csv, save_csv
+from roster import normalize_player_name
 
-AVAILABILITY_FILE = "availability.csv"
 AVAILABLE_DATES = [
     "May Tuesday 5th",
     "May Tuesday 19th",
@@ -38,10 +39,12 @@ def render_availability_tab():
             st.error("Please enter a player name.")
         else:
             updated_df = _upsert_availability(existing_df, player_name, selected_dates)
-            save_csv(AVAILABILITY_FILE, updated_df, f"Update availability for {player_name}")
+            save_csv(csv_repo_path(AVAILABILITY_FILE), updated_df, f"Update availability for {player_name}")
             existing_df = updated_df
             st.success(f"Saved availability for {player_name}.")
 
+    st.divider()
+    _render_completion_lists(existing_df)
     st.divider()
     st.markdown("### Submitted availability")
     if existing_df.empty:
@@ -54,10 +57,18 @@ def render_availability_tab():
 
 
 def _load_availability():
-    return load_csv(AVAILABILITY_FILE, ["Player", "Available Dates"])
+    df = load_csv(csv_repo_path(AVAILABILITY_FILE), ["Player", "Available Dates"])
+    if df.empty:
+        return df
+
+    df = df.copy()
+    df["Player"] = df["Player"].map(normalize_player_name)
+    df = df.drop_duplicates(subset=["Player"], keep="last")
+    return df
 
 
 def _upsert_availability(existing_df, player_name, selected_dates):
+    player_name = normalize_player_name(player_name)
     available_dates_value = ", ".join(selected_dates) if selected_dates else "No dates selected"
     new_row = pd.DataFrame(
         [{"Player": player_name, "Available Dates": available_dates_value}]
@@ -82,3 +93,15 @@ def _build_availability_chart(existing_df, available_dates):
     return pd.DataFrame(
         [{"Date": available_date, "Count": counts[available_date]} for available_date in available_dates]
     )
+
+
+def _render_completion_lists(existing_df):
+    submitted_players = sorted(
+        existing_df.get("Player", pd.Series(dtype=str)).dropna().tolist()
+    )
+
+    st.markdown("### Submitted players")
+    if submitted_players:
+        st.write(submitted_players)
+    else:
+        st.caption("No availability submissions yet.")
