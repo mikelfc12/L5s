@@ -10,4 +10,8 @@ POST_MATCH_FILE = CSV_DIR / "post_match.csv"
 
 
 def csv_repo_path(path):
-    return Path(path).as_posix()
+    path = Path(path)
+    try:
+        return path.relative_to(BASE_DIR).as_posix()
+    except ValueError:
+        return path.as_posix()
