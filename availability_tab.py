@@ -6,12 +6,13 @@ from github_csv import load_csv, save_csv
 from roster import normalize_player_name
 
 AVAILABLE_DATES = [
-    "May Tuesday 5th",
-    "May Tuesday 19th",
-    "May Wednesday 20th",
-    "May Tuesday 26th",
-    "May Wednesday 27th",
-    
+    "June Tuesday 2nd",
+    "June Wednesday 3rd",
+    "June Tuesday 9th",
+    "June Wednesday 10th",
+    "June Tuesday 16th",
+    "June Tuesday 23rd",
+    "June Wednesday 24th"
 ]
 
 
