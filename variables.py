@@ -1,20 +1,25 @@
 # --- Player GIFs ---
 player_images = {
-    "Jacob Stokes": "https://butchers-sundries.com/cdn/shop/products/OriginalTomatoKetchup_StockesSauces_ButchersSundries_Image1.jpg?v=1601653143&width=1000",
-    "Rory Scullin": "https://innerbody.imgix.net/Skull.png",
-    "James King": "images/king.png",
-    "Steven Robinson": "https://c8.alamy.com/comp/2A00MJT/promotion-label-promotion-red-band-sign-promotion-2A00MJT.jpg",
-    "Toby Munson": "https://static.wikia.nocookie.net/ttte/images/0/0c/MainTobyModel.png/revision/latest?cb=20250531164542",
-    "Callum Goodyear": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Callum_Turner-69856_%28cropped%29.jpg/960px-Callum_Turner-69856_%28cropped%29.jpg",
-    "Jamie Dobbs": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQiJiTXt371SjR3TzfBSavQFO8uIrvmvN74Mg&s",
-    "Michael Dixon": "https://preview.redd.it/no-hate-towards-mike-but-i-think-season-1-still-stands-as-v0-p7yus6zlb3i91.jpg?width=640&crop=smart&auto=webp&s=d2aeded52691af8650990b051c30e0090cebe65a",
-    "Daniel Hirst": "https://ichef.bbci.co.uk/images/ic/1200x675/p07h17xl.jpg",
-    "Oliver Deverall": "https://www.shutterstock.com/image-photo/delicious-green-olives-leaves-isolated-260nw-2492503625.jpg",
+    "Josh Ringer": "https://hips.hearstapps.com/hmg-prod/images/josh1-699819456da34.jpg?crop=1xw:1xh;center,top&resize=640:*",
+    "Oliver Deverall": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR-JVoIV9n0noftXRrYJAvSxfDT_vlWzSfPNg&s",
+       
+    "Jacob Stokes": "https://cdn.staticneo.com/w/twilight/JacobBlack.jpg",
+    "Steven Robinson": "https://upload.wikimedia.org/wikipedia/commons/5/5a/Steven_Seagal_at_Russia_Expo.jpg",
+    "Callum Goodyear": "https://ichef.bbci.co.uk/ace/standard/1680/cpsprodpb/2ae4/live/eca39d10-85d1-11f0-961b-671d5baac859.jpg",
+    "Jamie Dobbs": "https://e1.365dm.com/12/02/800x600/Jamie-O-Hara-Wolves_2720005.jpg?20120217102810",
+    "Michael Dixon": "https://upload.wikimedia.org/wikipedia/en/thumb/6/6a/Mike_Wazowski.png/250px-Mike_Wazowski.png",   
     
-    "Josh": "https://www.theodysseyonline.com/media-library/image.gif?id=56296612&width=210",
-    "Mark McGlinchey": "https://pbs.twimg.com/media/GOiFopxXYAA0vSy.jpg",
+    "Mark McGlinchey": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTAw4NpdrcFFUcMPY7U6CQOynickrOo0wWJflxWCy68AP_b__nm03ZDEX2sIldG6lqueUJD&s",
+    "Kev laaaa": "https://i.guim.co.uk/img/static/sys-images/Sport/Pix/pictures/2009/1/15/1232022588405/Kevin-Kilbane-001.jpg?width=465&dpr=1&s=none&crop=none",
+
+    "Daniel Hirst": "https://ichef.bbci.co.uk/images/ic/1200x675/p07h17xl.jpg",
+
     "John Bridgeman": "https://i.ytimg.com/vi/Uj5iPDcRiUg/maxresdefault.jpg",
+    "James King": "images/king.png",
+    "Toby Munson": "https://static.wikia.nocookie.net/ttte/images/0/0c/MainTobyModel.png/revision/latest?cb=20250531164542",
+    "Rory Scullin": "https://innerbody.imgix.net/Skull.png",
 }
+
 
 player_stats = {
     "Jacob Stokes": "Match ball hoarder",

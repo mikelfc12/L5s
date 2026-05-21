@@ -5,7 +5,7 @@ from data_paths import POST_MATCH_FILE, csv_repo_path
 from github_csv import load_csv, save_csv
 from roster import CANONICAL_PLAYERS, normalize_player_name
 
-GAMEWEEK = "GW10"
+GAMEWEEK = "GW11"
 POST_MATCH_PLAYERS = CANONICAL_PLAYERS
 RATING_OPTIONS = [1, 2, 3, 4, 5, 6, 7]
 

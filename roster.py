@@ -1,15 +1,18 @@
 CANONICAL_PLAYERS = [
-    "Rory Scullin",
+    # "Rory Scullin",
+    # "Toby Munson",
+    # "James King",
+
     "Steven Robinson",
     "Callum Goodyear",
-    "Toby Munson",
     "Michael Dixon",
     "Oliver Deverall",
     "Daniel Hirst",
     "Jacob Stokes",
     "Jamie Dobbs",
-    "James King",
     "Mark McGlinchey",
+    "Kevin",
+    "Josh"
 ]
 
 PLAYER_ALIASES = {

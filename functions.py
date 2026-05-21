@@ -13,10 +13,12 @@ def generate_teams(base_team_A, base_team_B, previous_teams, *pots):
     if not pots:
         raise ValueError("At least one pot must be provided")
 
-    if len(pots) > 3:
-        raise ValueError("A maximum of 3 pots is supported")
+    if len(pots) > 5:
+        raise ValueError("A maximum of 5 pots is supported")
 
-    while True:
+    max_attempts = 1000
+
+    for _ in range(max_attempts):
         team_A = base_team_A.copy()
         team_B = base_team_B.copy()
 
@@ -52,6 +54,8 @@ def generate_teams(base_team_A, base_team_B, previous_teams, *pots):
         if not contained_A and not contained_B:
             return team_A, team_B
 
+    raise ValueError("Unable to generate a new team combination from the available pots")
+
 
 def _normalise_pot(pot):
     if isinstance(pot, tuple):
@@ -69,8 +73,8 @@ def is_team_previously_contained(new_team, previous_teams):
     for team_name, old_team in previous_teams.items():
         old_set = set(player for player in old_team if player.strip())
 
-        # Check if entire new team is inside old team
-        if new_set.issubset(old_set):
+        # Only reject exact repeats of a previously drawn team.
+        if len(new_set) == len(old_set) and new_set == old_set:
             return True, team_name
 
     return False, None

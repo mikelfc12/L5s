@@ -8,9 +8,14 @@ import variables as v
 
 TEAM_A_STARTER = []
 TEAM_B_STARTER = []
-POT_1 = []
-POT_2 = ["Callum Goodyear", "Toby Munson", "Oliver Deverall", "Steven Robinson","Daniel Hirst", "Jacob Stokes"]
-POT_3 = ["Michael Dixon", "James King","Jamie Dobbs", "Rory Scullin"]
+POT_1 = ["Daniel Hirst", "Josh Ringer"]
+POT_2 = ["Callum Goodyear", "Oliver Deverall"]
+POT_3 = ["Michael Dixon", "Jamie Dobbs"]
+POT_4 = ["Mark McGlinchey", "Kev laaaa"]
+POT_5 = ["Jacob Stokes", "Steven Robinson"]
+
+FIRST_HOST_IMAGE = "images/host1.jpg"
+SECOND_HOST_IMAGE = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSynfA12iDA9sBWfhdOKiE3XTyVCOL9kfW9jwWXub5fvAqcwZ0YZl0MG2kfObdHmb1glLrYLIGYAibuE32UUhroR1HMdwM8fdfmbShZXg&s=10"
 
 
 def render_draw_tab():
@@ -40,38 +45,37 @@ def render_draw_tab():
             ("split", POT_1),
             ("split", POT_2),
             ("split", POT_3),
+            ("split", POT_4),
+            ("split", POT_5)
         )
+
         print("A:", team_a)
         print("B:", team_b)
 
         disp_f.say("Welcome to the **4MOST 5-a-Side Draw**", text_box)
 
+        disp_f.say("A quick caveat, I wrote this on Monday so if something goes wrong (shrug emoji)", text_box)
+        disp_f.say("The urls for some of the images driving me insane so it is what it issss", text_box)
+
         # Introduce hosts
         disp_f.say("Introducing our first host", text_box)
-        disp_f.say("All the way from Canada", text_box)
-        disp_f.say("You might be seeing more of them in Portugal", text_box)
-        gif_box.image("images/carly.png")
+        disp_f.say("We saw a lot of her last week", text_box)
+        gif_box.image(FIRST_HOST_IMAGE)
+        disp_f.pause(5)
         gif_box.empty()
-        disp_f.say("11 stage presence, lets see how you can perform on the biggest stage of all", text_box)
-        disp_f.say("The 4most 5 a side LIVE draw", text_box)
-        disp_f.say("Hey guyyssssss", text_box)
-        gif_box.empty()
+        disp_f.say("It's Dusty Springfield", text_box)
         disp_f.clear_text_box(text_box)
-        disp_f.say("Cheers Carly", text_box)
 
         disp_f.say("And alongside her, ", text_box)
-        disp_f.say("One of the worlds worst guys", text_box)
-        disp_f.say("Actually hate this guy", text_box)
-        gif_box.image("https://i.redd.it/kmb1j74ojhcb1.jpg")
-
-        disp_f.say("Do you have any quiz questions for us lads?", text_box)
-        disp_f.say("Rory and who other have the best 2 player combination with 4 wins from 4 and a GD of 14??", text_box)
-        disp_f.pause(10)
-        disp_f.say("Yep you guessed it, it's last weeks MOTM, ya boy Stokes", text_box)
+        disp_f.say("One of the worst groups going", text_box)
+        disp_f.say("How did I finish below these gimps in music league what the hell", text_box)
+        gif_box.image(SECOND_HOST_IMAGE)
+        disp_f.clear_text_box(text_box)
+        disp_f.say("It's Las Ketchup", text_box)
+        disp_f.say("the fuck", text_box)
+        disp_f.say("I know right", text_box)
         gif_box.empty()
-
-        disp_f.say("More stats like this corker on the site", text_box)
-
+        disp_f.clear_text_box(text_box)
 
         disp_f.say("Lovely day for it", text_box)
         disp_f.clear_text_box(text_box)
@@ -81,15 +85,8 @@ def render_draw_tab():
         disp_f.pause(5)
         gif_box.empty()
 
-        disp_f.say("Sunny init neymar", text_box)
-        disp_f.clear_text_box(text_box)
-
         disp_f.say("Right, lets get into the draw...", text_box)
-        disp_f.say("Everyone has played together now", text_box)
-        disp_f.say("So it's a case of breaking up the winning pairs", text_box)
-        disp_f.say("And getting the non winning pairs a win, if possible..", text_box)
-        disp_f.say("Also rotating the 5s, no 5 people will play as a team for as long as I can allow", text_box)
-
+        
         disp_f.clear_text_box(text_box)
 
         remaining_players = team_a + team_b
