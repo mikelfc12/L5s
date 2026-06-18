@@ -20,7 +20,7 @@ AVAILABLE_DATES = [
     "July Wednesday 22nd",
     "July Thursday 23rd",
 
-    "July Tuesday 28th"
+    "July Tuesday 28th",
     "July Wednesday 29th",
     "July Thursday 30th",
 ]
