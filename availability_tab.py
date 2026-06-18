@@ -6,15 +6,15 @@ from github_csv import load_csv, save_csv
 from roster import normalize_player_name
 
 AVAILABLE_DATES = [
-    "July Wednesday 1st (ENG group winners R32)",
+    "July Wednesday 1st (ENG group winners R32 5PM)",
     
-    "July Tuesday 7th (ENG group 3RD R32)",
+    "July Tuesday 7th (ENG group 3RD R32 9PM)",
     "July Wednesday 8th",
     "July Thursday 9th",
     
-    "July Tuesday 14th (ENG group RU SF)",
-    "July Wednesday 15th (ENG group winners SF)",
-    "July Tuesday 16th  (ENG group 3RD SF)"
+    "July Tuesday 14th (ENG group RU SF 8PM)",
+    "July Wednesday 15th (ENG group winners/3RD SF 8PM)",
+    "July Thursday 16th"
     
     "July Tuesday 21st",
     "July Wednesday 22nd",
