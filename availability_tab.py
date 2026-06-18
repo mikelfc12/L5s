@@ -14,7 +14,7 @@ AVAILABLE_DATES = [
     
     "July Tuesday 14th (ENG group RU SF 8PM)",
     "July Wednesday 15th (ENG group winners/3RD SF 8PM)",
-    "July Thursday 16th"
+    "July Thursday 16th",
     
     "July Tuesday 21st",
     "July Wednesday 22nd",
