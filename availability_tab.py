@@ -7,6 +7,7 @@ from roster import normalize_player_name
 
 AVAILABLE_DATES = [
     "July Wednesday 1st (ENG group winners R32 5PM)",
+    "July Thursday 2nd",
     
     "July Tuesday 7th (ENG group 3RD R32 9PM)",
     "July Wednesday 8th",
