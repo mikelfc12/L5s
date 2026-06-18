@@ -24,6 +24,8 @@ AVAILABLE_DATES = [
     "July Tuesday 28th",
     "July Wednesday 29th",
     "July Thursday 30th",
+    
+    "I am unable to play"
 ]
 
 
